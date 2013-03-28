@@ -19,47 +19,30 @@ uppercase:
               li $v0, 0
                                                                                               
 check:                                                                                         
-                          add $t0, $v0, $a0		# $t0 = &str[i]                                   
-                          lb $t5, ($t0)			# $t5 = str[i]                                       
-                          beq $t5, $0, exit		# $end of string
-						  blt $t5, 48, invalid	# if t5<48
+              add $t0, $v0, $a0		# $t0 = &str[i]                                   
+              lb $t5, ($t0)		# $t5 = str[i]                                       
+              beq $t5, $0, exit		# $end of string
+	      blt $t5, 48, invalid	# if t5<48
 						  
-						  slti $t1, $t5, 58		#if t5 between 58 and 65
-						  slti $t2, $t5, 65 
-						  slt $t3 $t1, $t2
-						  bne $t3, $zero, invalid 
+	      slti $t1, $t5, 58		#if t5 between 58 and 65
+	      slti $t2, $t5, 65 
+	      slt $t3 $t1, $t2
+	      bne $t3, $zero, invalid 
 						  
-						  slti $t1, $t5, 91		#if t5 between 91 and 97
-						  slti $t2, $t5, 97 
-						  slt $t3 $t1, $t2
-						  bne $t3, $zero, invalid						  
+	      slti $t1, $t5, 91		#if t5 between 91 and 97
+	      slti $t2, $t5, 97 
+	      slt $t3 $t1, $t2
+	      bne $t3, $zero, invalid						  
 						  
-						  bgt $t5, 'z', invalid	# t5 > z
+	      bgt $t5, 'z', invalid	# t5 > z
 						  
-                          blt $t5, 'a', next	# $t5 < 97?                                       
+              blt $t5, 'a', next	# $t5 < 97?                                       
                           
-						  sub $t5, $t5, 32		# convert to Uppercase                                         
-                          sb $t5, ($t0)			# store back
-						  
-next:                                                                                         
-                          addi $v0, $v0, 1		# i++                                              
-                          j check
-
-backwards:                                                                                         
-                          addi $v0, $v0, -1		# i--                                              
-                          j invalid
-
-invalid: 
-		      add $t0, $v0, $a0					# $t0 = &str[i]
-			  lb $t5, ($t0)						# $t5 = str[i]  
-			  add $t5, $t5, 32					#convert back to lowercase
-			  sb $t5, ($t0)						# store back
-			  bne $v0, $0, backwards
-			  add $v0, $0, 1
-			  jr $ra
+	      sub $t5, $t5, 32		# convert to Uppercase                                         
+              sb $t5, ($t0)			# store back
 						                                                         
 exit:         add $v0, $0, 0                                     
-			  jr $ra                                                                          
+	      jr $ra                                                                          
                          
 
 ##########################################################################
