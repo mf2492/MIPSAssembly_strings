@@ -1,0 +1,8 @@
+Michelle Fernandez (mf2492)
+
+This MIPS function takes in a string and converts it to uppercase. The function
+takes one argument, a pointer to a string, converts the string to upper case in place (i.e., overwriting lowercase characters with their
+uppercase values), and returns the value 0 to indicate success. Valid strings
+contain only alphanumbeic characters (i.e., a-zA-Z0-9).  If an input has
+an invalid character, you must leave the input string unchanged and return the
+integer 1 to indicate an error.
